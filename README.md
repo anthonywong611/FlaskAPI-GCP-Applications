@@ -12,3 +12,4 @@
 ### Challenge 1: Deploy the GKE cluster and database instance on a private VPC network, with access via a Global HTTPS load balancer. 
 ---
 ### Challenge 2: Implement a basic service mesh using Istio including an egress service entry for Cloud SQL.
+---
