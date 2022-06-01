@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% endblock %}
+
+{% block body %}
+
+{% from "includes/formhelpers.html" import render_field %}
+
+<form action="" method="POST">
+
+     <!-- First Name -->
+     <div class="row">
+          <!-- Input Box -->
+          <div class="right_col">
+               {{render_field(info.first_name, class_="form-control")}}
+          </div>
+     </div>
+     
+     <!-- Last Name -->
+     <div class="row">
+          <!-- Input Box -->
+          <div class="right_col">
+               {{render_field(info.last_name, class_="form-control")}}
+          </div>
+     </div>
+     
+     <!-- Age -->
+     <div class="row">
+          <!-- Input Box -->
+          <div class="right_col">
+               {{render_field(info.age, class_="form-control")}}
+          </div>
+     </div>
+     
+     <!-- Gender -->
+     <div class="row">
+          <!-- Input Box -->
+          <div class="right_col">
+               {{render_field(info.gender, class_="form-control")}}
+          </div>
+     </div>
+     
+     <!-- Ethnicity -->
+     <div class="row">
+          <!-- Input Box -->
+          <div class="right_col">
+               {{render_field(info.ethnicity, class_="form-control")}}
+          </div>
+     </div>
+
+     <br><br>
+
+     <div class="row">
+          <input type="submit" value="Enter" style="font-size: 20px; padding: 10px;">
+     </div>
+     
+</form>
+
+<div class="row">
+     <form action="/get" method="GET">
+          <input type="submit" value="Check" style="font-size: 20px; padding: 10px;">
+     </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,50 @@
+* {
+     box-sizing: border-box;
+}
+
+.body {
+     margin: 0;
+}
+
+.header, .row {
+     text-align: center;
+     font-size: x-large;
+     padding: 5px;
+     margin: 3px;
+}
+
+.header { 
+     font-size: x-large;
+}
+
+.intro {
+     text-align: center;
+     font-size: xx-large;
+     font-family: sans-serif;
+     padding: 50px;
+     border: 3px solid gray;
+     margin: 100px;
+     background-color: lightgrey;
+}
+
+.right_col {
+     display: inline-block;
+     width: 400px;
+     padding: 10px;
+     margin: 1px;
+     text-align: center;
+}
+
+#people {
+     font-family: sans-serif;
+     width: 100%;
+     border-collapse: collapse;
+     border: 1px solid gray;
+}
+
+
+th, td {
+     font-size: 25px;
+     padding: 5px;
+     text-align: center;
+}

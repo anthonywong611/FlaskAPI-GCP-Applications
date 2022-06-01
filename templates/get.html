@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% endblock %}
+
+{% block body %}
+
+<!-- Show stored data in JSON format -->
+
+<table style="text-align: center;" id="people">
+     <!-- Header -->
+     <tr> 
+          <th></th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Ethnicity</th>
+     </tr>
+     <!-- Jinja Syntax for generating results from the person table -->
+     {% for person in people %}
+          <tr>
+          {% for feature, info in person.items() %}
+               <td>{{ info|e }}</td>
+          {% endfor %}
+          </tr>
+     {% endfor %}
+</table>
+
+<div class="row" style="margin: 50px;">
+     <form action="/post">
+          <button type="submit" style="font-size: 20px; padding: 10px;">Return</button>
+     </form>
+</div>
+
+{% endblock %}
