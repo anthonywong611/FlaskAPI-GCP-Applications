@@ -97,8 +97,6 @@ def check():
      if request.method == 'POST': 
           return render_template('post.html')
      else:
-          # TODO: Return all the data here...
-          people_dict = {}
           with mysql.connection.cursor() as cur:
 
                people_data = cur.execute('SELECT * FROM person;')
