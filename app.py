@@ -82,7 +82,7 @@ def enter():
         # Store data in the MySQL database instance
         with engine.connect() as conn:
             conn.execute("INSERT INTO person (first_name, last_name, age, gender, ethnicity) \
-                            VALUES (%s, %s, %i, %s, %s)",  # TODO: Need to check if this format works in Postgres...
+                            VALUES (%s, %s, %d, %s, %s)",  # TODO: Need to check if this format works in Postgres...
                          {"first_name": first_name,
                           "last_name": last_name,
                           "age": age,
