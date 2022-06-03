@@ -99,11 +99,12 @@ def check():
         return render_template('post.html')
     else:
         with engine.connect() as conn:
-
+          
             people_data = conn.execute('SELECT * FROM person;')
             people = people_data.fetchall()  # TODO: changed conn to people_data... Not sure yet
+            conn.commit()
 
-            return render_template('get.html', people=people)
+        return render_template('get.html', people=people)
 
 
 if __name__ == "__main__":
