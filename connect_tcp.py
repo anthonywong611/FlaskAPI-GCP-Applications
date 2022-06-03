@@ -1,19 +1,3 @@
-# Copyright 2022 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# [START cloud_sql_postgres_sqlalchemy_connect_tcp]
-# [START cloud_sql_postgres_sqlalchemy_sslcerts]
 import os
 import ssl
 
@@ -62,37 +46,17 @@ def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
             database=db_name,
         ),
         connect_args=connect_args,
-        # [START_EXCLUDE]
-        # [START cloud_sql_postgres_sqlalchemy_limit]
-        # Pool size is the maximum number of permanent connections to keep.
-        pool_size=5,
+        
+        pool_size=5, # maximum number of permanent connections to keep.
         # Temporarily exceeds the set pool_size if no connections are available.
         max_overflow=2,
         # The total number of concurrent connections for your application will be
         # a total of pool_size and max_overflow.
-        # [END cloud_sql_postgres_sqlalchemy_limit]
 
-        # [START cloud_sql_postgres_sqlalchemy_backoff]
-        # SQLAlchemy automatically uses delays between failed connection attempts,
-        # but provides no arguments for configuration.
-        # [END cloud_sql_postgres_sqlalchemy_backoff]
-
-        # [START cloud_sql_postgres_sqlalchemy_timeout]
-        # 'pool_timeout' is the maximum number of seconds to wait when retrieving a
-        # new connection from the pool. After the specified amount of time, an
-        # exception will be thrown.
+        # maximum number of seconds to wait when retrieving a new connection from the pool. 
         pool_timeout=30,  # 30 seconds
-        # [END cloud_sql_postgres_sqlalchemy_timeout]
 
-        # [START cloud_sql_postgres_sqlalchemy_lifetime]
-        # 'pool_recycle' is the maximum number of seconds a connection can persist.
-        # Connections that live longer than the specified amount of time will be
-        # re-established
+        # maximum number of seconds a connection can persist.
         pool_recycle=1800,  # 30 minutes
-        # [END cloud_sql_postgres_sqlalchemy_lifetime]
-        # [END_EXCLUDE]
     )
     return pool
-
-# [END cloud_sql_postgres_sqlalchemy_sslcerts]
-# [END cloud_sql_postgres_sqlalchemy_connect_tcp]
