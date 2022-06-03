@@ -51,7 +51,7 @@ def create_table(db_engine: sqlalchemy.engine.base.Engine) -> None:
                  ethnicity VARCHAR(20) \
              );"
         )
-        conn.commit()  # DBAPI connection is non-autocommitting
+        #conn.commit()  # DBAPI connection is non-autocommitting
 
 
 # Home Page
@@ -85,7 +85,7 @@ def enter():
                           "gender": gender,
                           "ethnicity": ethnicity}
                          )
-            conn.commit()
+            #conn.commit()
 
         return redirect(url_for('enter'))
     else:
@@ -102,7 +102,7 @@ def check():
           
             people_data = conn.execute('SELECT * FROM person;')
             people = people_data.fetchall()  # TODO: changed conn to people_data... Not sure yet
-            conn.commit()
+            #conn.commit()
 
         return render_template('get.html', people=people)
 
