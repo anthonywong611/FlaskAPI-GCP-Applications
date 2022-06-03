@@ -19,13 +19,6 @@ from connect_tcp import connect_tcp_socket
 
 app = Flask(__name__)
 
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'anthony'
-# app.config['MYSQL_PASSWORD'] = 'Huangjianen611?'
-# app.config['MYSQL_DB'] = 'flask_app'
-# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-
-# mysql = MySQL(app)
 
 # Initialize database
 engine = connect_tcp_socket()  # sqlalchemy.engine.base.Engine
@@ -52,7 +45,6 @@ def create_table(db_engine: sqlalchemy.engine.base.Engine) -> None:
                  ethnicity VARCHAR(20) \
              );"
         )
-        #conn.commit()  # DBAPI connection is non-autocommitting
 
 
 # Home Page
@@ -99,8 +91,7 @@ def check():
         with engine.connect() as conn:
           
             people_data = conn.execute('SELECT * FROM person;')
-            people = people_data.fetchall()  # TODO: changed conn to people_data... Not sure yet
-            #conn.commit()
+            people = people_data.fetchall()  
 
         return render_template('get.html', people=people)
 
