@@ -14,7 +14,7 @@ from wsgiref.validate import validator
 from flask import Flask, redirect, render_template, request, Response, url_for
 from wtforms import Form, StringField, TextAreaField, validators, IntegerField
 import sqlalchemy
-from sqlalchemy.sql import text
+from sqlalchemy import text
 from connect_tcp import connect_tcp_socket
 
 app = Flask(__name__)
@@ -81,14 +81,8 @@ def enter():
 
         # Store data in the MySQL database instance
         with engine.connect() as conn:
-            conn.execute("INSERT INTO person (first_name, last_name, age, gender, ethnicity) \
-                            VALUES (%s, %s, %%, %s, %s)",  # TODO: Need to check if this format works in Postgres...
-                         {"first_name": first_name,
-                          "last_name": last_name,
-                          "age": age,
-                          "gender": gender,
-                          "ethnicity": ethnicity}
-                         )
+            conn.execute(stmt, first_name=first_name, last_name=last_name, \
+                 age=age, gender=gender, ethnicity=ethnicity)
             #conn.commit()
 
         return redirect(url_for('enter'))
