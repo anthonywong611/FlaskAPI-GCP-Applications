@@ -5,8 +5,8 @@ FROM python:3.8-slim
 COPY requirements.txt ./
 
 # Install production dependencies.
-RUN virtualenv --python python3 env; \
-     source env/bin/activate; \
+RUN virtualenv --python python3 env && \
+     source env/bin/activate && \
      pip3 install -r requirements.txt
 
 # Copy local code to the container image.
