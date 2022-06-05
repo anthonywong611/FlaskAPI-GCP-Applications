@@ -1,39 +1,57 @@
-# Copyright 2021 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: iaas
+  name: cloudsql-from-k8s
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: iaas
+      app: flask-app  # APP_NAME
   template:
     metadata:
       labels:
-        app: iaas
+        app: flask-app  # APP_NAME
     spec:
+      serviceAccountName: ${KSA_NAME}  
+      # 1. For running the application
       containers:
       - name: flask-app
-        # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
-        # Replace $GCLOUD_PROJECT with your project ID.
-        image: northamerica-northeast2-docker.pkg.dev/data-at-anz-350321/flask-repo/iaas-on-gcp:latest
-        # This app listens on port 8080 for web traffic by default.
+        image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${folder}:latest
         ports:
         - containerPort: 8080
         env:
-          - name: PORT
-            value: "8080"
+        - name: PORT
+          value: "8080"
+        - name: INSTANCE_HOST
+          value: "127.0.0.1"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: ${DB_SECRET}
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ${DB_SECRET}
+              key: password
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: ${DB_SECRET}
+              key: database
+      # 2. For running the Cloud SQL Auth proxy alongside the application
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:latest 
+        command:
+          - "/cloud_sql_proxy"
+          - "-log_debug_stdout"
+          - "-instances=${CONNECTION_NAME}=tcp:5432"
+        securityContext:
+          # The default Cloud SQL proxy image runs as the
+          # "nonroot" user and group (uid: 65532) by default.
+          runAsNonRoot: true
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu:    "1"
