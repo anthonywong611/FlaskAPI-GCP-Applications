@@ -1,6 +1,4 @@
 import os
-import ssl
-
 import sqlalchemy
 
 
@@ -18,22 +16,7 @@ def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
     db_port = os.environ["DB_PORT"]  # e.g. 5432
 
     connect_args = {}
-    # [END cloud_sql_postgres_sqlalchemy_connect_tcp]
-    # For deployments that connect directly to a Cloud SQL instance without
-    # using the Cloud SQL Proxy, configuring SSL certificates will ensure the
-    # connection is encrypted.
-    if os.environ.get("DB_ROOT_CERT"):
-        db_root_cert = os.environ["DB_ROOT_CERT"]  # e.g. '/path/to/my/server-ca.pem'
-        db_cert = os.environ["DB_CERT"]  # e.g. '/path/to/my/client-cert.pem'
-        db_key = os.environ["DB_KEY"]  # e.g. '/path/to/my/client-key.pem'
 
-        ssl_context = ssl.SSLContext()
-        ssl_context.verify_mode = ssl.CERT_REQUIRED
-        ssl_context.load_verify_locations(db_root_cert)
-        ssl_context.load_cert_chain(db_cert, db_key)
-        connect_args["ssl_context"] = ssl_context
-
-    # [START cloud_sql_postgres_sqlalchemy_connect_tcp]
     pool = sqlalchemy.create_engine(
         # Equivalent URL:
         # postgresql+pg8000://<db_user>:<db_pass>@<db_host>:<db_port>/<db_name>

@@ -11,11 +11,11 @@ spec:
       labels:
         app: flask-app  # APP_NAME
     spec:
-      serviceAccountName: ${KSA_NAME}  
+      serviceAccountName: ${KSA_NAME}  # TODO
       # 1. For running the application
       containers:
       - name: flask-app
-        image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${folder}:latest
+        image: ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${folder}:latest  # TODO
         ports:
         - containerPort: 8080
         env:
@@ -28,25 +28,24 @@ spec:
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: ${DB_SECRET}
+              name: ${DB_SECRET}  # TODO
               key: username
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
-              name: ${DB_SECRET}
+              name: ${DB_SECRET}  # TODO
               key: password
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: ${DB_SECRET}
+              name: ${DB_SECRET}  # TODO
               key: database
       # 2. For running the Cloud SQL Auth proxy alongside the application
       - name: cloud-sql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:latest 
         command:
           - "/cloud_sql_proxy"
-          - "-log_debug_stdout"
-          - "-instances=${CONNECTION_NAME}=tcp:5432"
+          - "-instances=${CONNECTION_NAME}=tcp:5432"  # TODO
         securityContext:
           # The default Cloud SQL proxy image runs as the
           # "nonroot" user and group (uid: 65532) by default.
