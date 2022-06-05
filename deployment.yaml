@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloudsql-from-k8s
+  name: cloudsql-from-gke
 spec:
   selector:
     matchLabels:
@@ -11,7 +11,7 @@ spec:
       labels:
         app: flask-app  # APP_NAME
     spec:
-      serviceAccountName: cloud-sql-kub  # TODO
+      serviceAccountName: cloud-sql-kub-role  # TODO
       # 1. For running the application
       containers:
       - name: flask-app
