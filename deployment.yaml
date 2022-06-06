@@ -43,7 +43,7 @@ spec:
         resources:
           requests:
             memory: "1Gi"
-            cpu:    "1"
+            cpu:    "500m"
           limits:
             memory: "4Gi"
             cpu: "2"
@@ -59,8 +59,8 @@ spec:
           runAsNonRoot: true
         resources:
           requests:
-            memory: "3Gi"
-            cpu:    "1"
+            memory: "1Gi"
+            cpu:    "500m"
           limits:
             memory: "4Gi"
             cpu: "2"
