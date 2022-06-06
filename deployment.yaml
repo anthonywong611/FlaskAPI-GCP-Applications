@@ -40,6 +40,13 @@ spec:
             secretKeyRef:
               name: secret  # TODO
               key: database
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu:    "1"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
       # 2. For running the Cloud SQL Auth proxy alongside the application
       - name: cloud-sql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:latest 
@@ -52,5 +59,8 @@ spec:
           runAsNonRoot: true
         resources:
           requests:
-            memory: "2Gi"
+            memory: "3Gi"
             cpu:    "1"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
