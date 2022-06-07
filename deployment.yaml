@@ -42,10 +42,10 @@ spec:
               key: database
         resources:
           requests:
-            memory: "1Gi"
+            memory: "1G"
             cpu:    "500m"
           limits:
-            memory: "4Gi"
+            memory: "4G"
             cpu: "2"
       # 2. For running the Cloud SQL Auth proxy alongside the application
       - name: cloud-sql-proxy
@@ -59,8 +59,8 @@ spec:
           runAsNonRoot: true
         resources:
           requests:
-            memory: "1Gi"
+            memory: "1G"
             cpu:    "500m"
           limits:
-            memory: "4Gi"
+            memory: "4G"
             cpu: "2"
