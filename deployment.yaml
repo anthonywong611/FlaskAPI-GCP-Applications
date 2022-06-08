@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: cloudsql-from-gke
 spec:
+  replicas: 1
   selector:
     matchLabels: 
       app: flask-app  # APP_NAME
@@ -11,7 +12,7 @@ spec:
       labels:
         app: flask-app  # APP_NAME
     spec:
-      serviceAccountName: gke-cloudsql-k8s  # TODO
+      # serviceAccountName: gke-cloudsql-k8s  # TODO
       # 1. For running the application
       containers:
       - name: flask-app
@@ -28,39 +29,34 @@ spec:
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: secret  # TODO
+              name: db-secret  # TODO
               key: username
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
-              name: secret  # TODO
+              name: db-secret  # TODO
               key: password
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: secret  # TODO
+              name: db-secret  # TODO
               key: database
-        # resources:
-        #   requests:
-        #     memory: "1G"
-        #     cpu: "1"
-        #   limits:
-        #     memory: "4G"
-        #     cpu: "2"
       # 2. For running the Cloud SQL Auth proxy alongside the application
       - name: cloud-sql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:latest 
         command:
           - "/cloud_sql_proxy"
-          - "-instances=data-at-anz-350321:northamerica-northeast2:instance-17=tcp:5432"  # TODO
+          - "-instances=data-at-anz-350321:northamerica-northeast2:instance-18=tcp:5432"  # TODO
+          - "-credential_file=/secrets/service_account.json"
         securityContext:
           # The default Cloud SQL proxy image runs as the
           # "nonroot" user and group (uid: 65532) by default.
           runAsNonRoot: true
-        # resources:
-        #   requests:
-        #     memory: "1G"
-        #     cpu: "1"
-        #   limits:
-        #     memory: "4G"
-        #     cpu: "2"
+        volumeMounts:
+        - name: sa-volume
+          mountPath: /secrets/
+          readOnly: true
+      volumes:
+      - name: sa-volume
+        secret:
+          secretName: sa-secret
