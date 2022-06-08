@@ -11,7 +11,7 @@ spec:
       labels:
         app: flask-app  # APP_NAME
     spec:
-      serviceAccountName: gke-cloudsql-k8s-service-account  # TODO
+      serviceAccountName: gke-cloudsql-k8s  # TODO
       # 1. For running the application
       containers:
       - name: flask-app
