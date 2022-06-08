@@ -52,7 +52,7 @@ spec:
         image: gcr.io/cloudsql-docker/gce-proxy:latest 
         command:
           - "/cloud_sql_proxy"
-          - "-instances=data-at-anz-350321:northamerica-northeast2:instance-16=tcp:5432"  # TODO
+          - "-instances=data-at-anz-350321:northamerica-northeast2:instance-17=tcp:5432"  # TODO
         securityContext:
           # The default Cloud SQL proxy image runs as the
           # "nonroot" user and group (uid: 65532) by default.
