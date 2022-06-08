@@ -5,11 +5,11 @@ gcloud artifacts repositories create $REPO_NAME \
 --project=$PROJECT_ID \
 --repository-format=docker \
 --location=$REGION \
---description="Docker Repository"
+--description="Cloud SQL to GKE application"
 
 # Make sure in the paas-on-gcp directory
 # Containerize the Flask API using Cloud Build
-export IMAGE=$(basename $(pwd))
+export IMAGE=cloudsql-to-gke
 gcloud builds submit \
 --tag $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE .
 
