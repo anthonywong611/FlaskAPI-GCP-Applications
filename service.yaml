@@ -25,5 +25,5 @@ spec:
   selector:
     app: flask-app
   ports:
-  - port: 80
-    targetPort: 8080
+  - port: 80  # Users may access the application through port 80
+    targetPort: 8080  # Connect from port 80 to the container port 8080 
