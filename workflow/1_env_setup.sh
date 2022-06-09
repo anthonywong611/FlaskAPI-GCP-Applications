@@ -6,7 +6,7 @@ export WORKING_DIR=$(pwd)
 
 # --- Database Instance Info --- #
 export INSTANCE_HOST='127.0.0.1'
-export INSTANCE_NAME='instance-19'  # TODO: Replace these values
+export INSTANCE_NAME='instance-20'  # TODO: Replace these values
 export DB_USER='anthony' 
 export DB_PASS='Huangjianen611?'  # TODO: Replace these values
 export DB_NAME='flask-data'  # TODO: Replace these values
