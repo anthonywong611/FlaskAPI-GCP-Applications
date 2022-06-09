@@ -1,15 +1,15 @@
 # --- Project Info --- #
-export PROJECT_ID='data-at-anz-350321'  # TODO: Replace these values
-export REGION='northamerica-northeast2'  # TODO: Replace these values 
-export ZONE='northamerica-northeast2-a'  # TODO: Replace these values
+export PROJECT_ID='<project-id>'  # TODO: Replace these values
+export REGION='<region>'  # TODO: Replace these values 
+export ZONE='<zone>'  # TODO: Replace these values
 export WORKING_DIR=$(pwd)
 
 # --- Database Instance Info --- #
 export INSTANCE_HOST='127.0.0.1'
-export INSTANCE_NAME='instance-22'  # TODO: Replace these values
-export DB_USER='anthony'  # TODO: Replace these values
-export DB_PASS='Huangjianen611?'  # TODO: Replace these values
-export DB_NAME='flask-data'  # TODO: Replace these values
+export INSTANCE_NAME='<instance-name>'  # TODO: Replace these values
+export DB_USER='<user-name>'  # TODO: Replace these values
+export DB_PASS='<password>'  # TODO: Replace these values
+export DB_NAME='<database-name>'  # TODO: Replace these values
 export DB_PORT='5432'
 
 # Project Setup

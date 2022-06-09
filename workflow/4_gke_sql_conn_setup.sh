@@ -12,18 +12,18 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 --member="serviceAccount:$GSA_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
 --role="roles/cloudsql.client"
 
-# Generate service accont key for the Cloud SQL Auth proxy pod
+# 3. Generate service accont key for the Cloud SQL Auth proxy pod
 gcloud iam service-accounts keys create key.json \
 --iam-account=$GSA_NAME@$PROJECT_ID.iam.gserviceaccount.com
 
-# Setting secrets for connecting to CloudSQL from GKE
-# Database Secrets
+# 4. Setting secrets for connecting to CloudSQL from GKE
+# 4.1. Database Secrets
 kubectl create secret generic $DB_SECRET \
 --from-literal=username=$DB_USER \
 --from-literal=password=$DB_PASS \
 --from-literal=database=$DB_NAME
 
-# Service Account Secret
+# 4.2. Service Account Secret
 kubectl create secret generic $SA_SECRET \
 --from-file=service_account.json=key.json
 
