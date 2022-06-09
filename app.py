@@ -25,7 +25,7 @@ class InfoForm(Form):
     language = StringField('What language are you interested in learning? ', validators=[validators.optional()])
     movie = StringField('What\'s the most memorable movie you\'ve watched?  ', validators=[validators.optional()])
     celebrity = StringField('Which celebrity would you like a photo with? ', validators=[validators.optional()])
-    desert = StringField('What\'s your favourite desert? ', validators=[validators.optional()])
+    dessert = StringField('What\'s your favourite desert? ', validators=[validators.optional()])
     travel = StringField('Where will you travel next summer? ', validators=[validators.optional()])
 
 
@@ -37,7 +37,7 @@ def create_table(db_engine: sqlalchemy.engine.base.Engine) -> None:
                  language VARCHAR(20), \
                  movie VARCHAR(20), \
                  celebrity VARCHAR(20), \
-                 desert VARCHAR(20), \
+                 dessert VARCHAR(20), \
                  travel VARCHAR(20) \
              );"
         )
@@ -61,16 +61,16 @@ def enter():
         language = info.language.data
         movie = info.movie.data
         celebrity = info.celebrity.data
-        desert = info.desert.data
+        dessert = info.dessert.data
         travel = info.travel.data
 
-        stmt = text("INSERT INTO favourite (language, movie, celebrity, desert, travel) \
-                     VALUES (:language, :movie, :celebrity, :desert, :travel)")
+        stmt = text("INSERT INTO favourite (language, movie, celebrity, dessert, travel) \
+                     VALUES (:language, :movie, :celebrity, :dessert, :travel)")
 
         # Store data in the MySQL database instance
         with engine.connect() as conn:
             conn.execute(stmt, language=language, movie=movie, \
-                 celebrity=celebrity, desert=desert, travel=travel)
+                 celebrity=celebrity, dessert=dessert, travel=travel)
 
         return redirect(url_for('enter'))
     else:
