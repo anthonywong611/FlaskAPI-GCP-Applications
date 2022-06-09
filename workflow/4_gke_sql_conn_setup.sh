@@ -1,3 +1,4 @@
+export GSA_NAME='gke-sql-iam-sa'  
 export DB_SECRET='db-secret'
 export SA_SECRET='sa-secret'
 
