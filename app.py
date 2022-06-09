@@ -6,10 +6,6 @@
 # -- 3. Use JSON for the request and response formats.
 # ------------------------------------------------------------------------------------------------
 
-import datetime
-import logging
-import os
-from typing import Dict
 from wsgiref.validate import validator
 from flask import Flask, redirect, render_template, request, Response, url_for
 from wtforms import Form, StringField, TextAreaField, validators, IntegerField
@@ -26,23 +22,23 @@ engine = connect_tcp_socket()  # sqlalchemy.engine.base.Engine
 
 class InfoForm(Form):
 
-    first_name = StringField('First Name ', validators=[validators.input_required()])
-    last_name = StringField('Last Name ', validators=[validators.input_required()])
-    age = IntegerField('Age ', validators=[validators.NumberRange(min=0, max=120)])
-    gender = StringField('Gender ', validators=[validators.optional()])
-    ethnicity = StringField('Ethnicity ', validators=[validators.optional()])
+    language = StringField('What language are you interested in learning? ', validators=[validators.optional()])
+    movie = StringField('What\'s the most memorable movie you\'ve watched?  ', validators=[validators.optional()])
+    celebrity = StringField('Which celebrity would you like a photo with? ', validators=[validators.optional()])
+    desert = StringField('What\'s your favourite desert? ', validators=[validators.optional()])
+    travel = StringField('Where will you travel next summer? ', validators=[validators.optional()])
 
 
 def create_table(db_engine: sqlalchemy.engine.base.Engine) -> None:
     with db_engine.connect() as conn:
         conn.execute(
-            "CREATE TABLE IF NOT EXISTS person (\
+            "CREATE TABLE IF NOT EXISTS favourite (\
                  person_id SERIAL NOT NULL PRIMARY KEY, \
-                 first_name VARCHAR(20) NOT NULL, \
-                 last_name VARCHAR(20) NOT NULL, \
-                 age INT CHECK (age >= 0 AND age <= 120), \
-                 gender VARCHAR(10), \
-                 ethnicity VARCHAR(20) \
+                 language VARCHAR(20), \
+                 movie VARCHAR(20), \
+                 celebrity VARCHAR(20), \
+                 desert VARCHAR(20), \
+                 travel VARCHAR(20) \
              );"
         )
 
@@ -62,20 +58,19 @@ def enter():
     if request.method == 'POST' and info.validate():
 
         # Retrieved input information from the form
-        first_name = info.first_name.data
-        last_name = info.last_name.data
-        age = info.age.data
-        gender = info.gender.data
-        ethnicity = info.ethnicity.data
+        language = info.language.data
+        movie = info.movie.data
+        celebrity = info.celebrity.data
+        desert = info.desert.data
+        travel = info.travel.data
 
-        stmt = text("INSERT INTO person (first_name, last_name, age, gender, ethnicity) \
-                     VALUES (:first_name, :last_name, :age, :gender, :ethnicity)")
+        stmt = text("INSERT INTO favourite (language, movie, celebrity, desert, travel) \
+                     VALUES (:language, :movie, :celebrity, :desert, :travel)")
 
         # Store data in the MySQL database instance
         with engine.connect() as conn:
-            conn.execute(stmt, first_name=first_name, last_name=last_name, \
-                 age=age, gender=gender, ethnicity=ethnicity)
-            #conn.commit()
+            conn.execute(stmt, language=language, movie=movie, \
+                 celebrity=celebrity, desert=desert, travel=travel)
 
         return redirect(url_for('enter'))
     else:
@@ -90,10 +85,10 @@ def check():
     else:
         with engine.connect() as conn:
           
-            people_data = conn.execute('SELECT * FROM person;')
-            people = people_data.fetchall()  
+            favourite_data = conn.execute('SELECT * FROM favourite;')
+            favourites = favourite_data.fetchall()  
 
-        return render_template('get.html', people=people)
+        return render_template('get.html', favourites=favourites)
 
 
 if __name__ == "__main__":

@@ -10,17 +10,17 @@
 <table style="text-align: center;" id="people">
      <!-- Header -->
      <tr> 
-          <th></th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Ethnicity</th>
+          <th>ID</th>
+          <th>Language</th>
+          <th>Movie</th>
+          <th>Celebrity</th>
+          <th>Desert</th>
+          <th>Travel</th>
      </tr>
      <!-- Jinja Syntax for generating results from the person table -->
-     {% for person in people %}
+     {% for favourite in favourites %}
           <tr>
-          {% for feature, info in person.items() %}
+          {% for feature, info in favourite.items() %}
                <td>{{ info|e }}</td>
           {% endfor %}
           </tr>
