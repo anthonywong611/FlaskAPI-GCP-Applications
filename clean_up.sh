@@ -1,3 +1,6 @@
+# 0. Make sure all environment variables still exist
+source workflow/0_var.sh
+
 # 1. Delete the cluster
 gcloud container clusters delete $CLUSTER_NAME --zone $ZONE
 
