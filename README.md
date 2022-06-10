@@ -1,18 +1,17 @@
 # FlaskAPI on Google Cloud Platform (GCP)
 - **Goal**: Deploy a containerized Flask API on Google Cloud Platform, exposing it the internet for API users to make requests and store user information. 
 
----
+
 ## Application Overview
 
 
----
 ## Infrastructure Overview
 ![](images/architecture.png)
----
 
----
+
+
 ## Running the Project
----
+
 
 
 
