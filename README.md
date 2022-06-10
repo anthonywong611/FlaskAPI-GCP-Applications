@@ -1,5 +1,8 @@
 # FlaskAPI on Google Cloud Platform (GCP)
 ---
+## Architecture
+![images/architecture.png]
+---
 ## 1. Create an application repository on GitHub. Document configuration and deployment steps in a README document.
 ---
 ## 2. Using the application repository, create a simple container app (using Docker) using Flask or any other simple API framework to expose GET and POST methods.  
