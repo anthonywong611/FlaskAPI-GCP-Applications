@@ -26,8 +26,8 @@ cd paas-on-gcp/
 
 **3. Open the Cloud Shell Editor and set up environment variables**
 - Go to the workflow folder and open [0_var.sh](https://github.com/anthonywong611/paas-on-gcp/blob/main/workflow/0_var.sh)
-- Update the variables where a "TODO: Replace these values" comment indicates
-
+- Update to your preference the variables where a "TODO: Replace these values" comment indicates
+![](images/variables.PNG)
 
 
 
