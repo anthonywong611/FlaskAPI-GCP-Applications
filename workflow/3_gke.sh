@@ -1,6 +1,5 @@
 # Create a single node GKE Cluster
 # Enable Workload Identity on the cluster
-export CLUSTER_NAME='flask-cluster'
 gcloud container clusters create $CLUSTER_NAME \
 --num-nodes=1 \
 --zone=$ZONE \

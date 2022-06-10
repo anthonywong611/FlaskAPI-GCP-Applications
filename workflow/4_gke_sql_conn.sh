@@ -1,6 +1,3 @@
-export GSA_NAME='gke-sql-iam-sa'  
-export DB_SECRET='db-secret'
-export SA_SECRET='sa-secret'
 
 # 1. Create a GSA for the project
 gcloud iam service-accounts create $GSA_NAME \
