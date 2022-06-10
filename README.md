@@ -9,9 +9,17 @@
 ![](images/architecture.png)
 
 
-
+---
 ## Running the Project
+**1. Go to the Goole Cloud console and create a new project. **
+- Keep note of the Project ID
 
+**2. Activate Cloud Shell on the top right header and clone this repository in the home directory**
+- Copy the following command to clone the repository
+
+```bash
+git clone https://github.com/anthonywong611/paas-on-gcp.git
+```
 
 
 
