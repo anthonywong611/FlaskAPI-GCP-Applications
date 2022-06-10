@@ -1,8 +1,24 @@
 # FlaskAPI on Google Cloud Platform (GCP)
 ---
-## Architecture
+## Description
+The goal of this project is to deploy a containerized Flask API on Google Cloud Platform, exposing it the internet for API users to make requests and submit information. 
+
+---
+## Application Overview
+
+
+---
+## Infrastructure Overview
 ![](images/architecture.png)
 ---
+
+---
+## Running the Project
+---
+
+
+
+
 ## 1. Create an application repository on GitHub. Document configuration and deployment steps in a README document.
 ---
 ## 2. Using the application repository, create a simple container app (using Docker) using Flask or any other simple API framework to expose GET and POST methods.  
