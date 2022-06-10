@@ -1,4 +1,4 @@
-# PaaS_on_GCP
+# FlaskAPI on Google Cloud Platform (GCP)
 ---
 ## 1. Create an application repository on GitHub. Document configuration and deployment steps in a README document.
 ---
