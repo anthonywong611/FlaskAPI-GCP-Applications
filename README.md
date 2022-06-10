@@ -11,7 +11,7 @@
 
 ---
 ## Running the Project
-**1. Go to the Goole Cloud console and create a new project.**
+**1. Go to the Goole Cloud console and create a new project**
 - Keep note of the Project ID
 
 **2. Activate Cloud Shell on the top right header and clone this repository in the home directory**
@@ -24,7 +24,9 @@ git clone https://github.com/anthonywong611/paas-on-gcp.git
 cd paas-on-gcp/
 ```
 
-**3.**
+**3. Open the Cloud Shell Editor and set up environment variables**
+- Go to the workflow folder and open [0_var.sh]()
+- Update the variables where a "TODO: Replace these values" comment indicates
 
 
 
