@@ -11,23 +11,49 @@
 
 ---
 ## Running the Project
-**1. Go to the Goole Cloud console and create a new project**
+**1. Go to the Goole Cloud console**
+- Create a new project
 - Keep note of the Project ID
+- [Determine and keep note of the region and zone](https://cloud.google.com/compute/docs/regions-zones)
+
+```bash
+gcloud compute zones list  # Run this command for reference
+```
+
 
 **2. Activate Cloud Shell on the top right header and clone this repository in the home directory**
 - Copy the following command to clone the repository
+
 ```bash
 git clone https://github.com/anthonywong611/paas-on-gcp.git
 ```
+
 - Change directory into the paas-on-gcp folder
+
 ```bash
 cd paas-on-gcp/
 ```
 
 **3. Open the Cloud Shell Editor and set up environment variables**
 - Go to the workflow folder and open [0_var.sh](https://github.com/anthonywong611/paas-on-gcp/blob/main/workflow/0_var.sh)
-- Update to your preference the variables where a "TODO: Replace these values" comment indicates
-![](images/variables.PNG)
+- Update the project variables 
+- Update to your preference database instance variables where a "TODO: Replace these values" comment indicates
+
+```bash
+# --- Project Info --- #
+export PROJECT_ID='<project-id>'  # TODO: Replace these values
+export REGION='<region>'  # TODO: Replace these values 
+export ZONE='<zone>'  # TODO: Replace these values
+export WORKING_DIR=$(pwd)
+
+# --- Database Instance Info --- #
+export INSTANCE_HOST='127.0.0.1'
+export INSTANCE_NAME='<instance-name>'  # TODO: Replace these values
+export DB_USER='<user-name>'  # TODO: Replace these values
+export DB_PASS='<password>'  # TODO: Replace these values
+export DB_NAME='<database-name>'  # TODO: Replace these values
+export DB_PORT='5432'
+```
 
 
 
