@@ -82,8 +82,6 @@ kubectl get services
 **6. Making requests to the API**
 
 ![](images/api_welcome.PNG)
-![](images/api_post.PNG)
-![](images/api_get.PNG)
 
 **7. Clean up the project**
 - Run the following command to terminate all infrastructures and accounts
@@ -91,12 +89,6 @@ kubectl get services
 ```bash
 source clean_up.sh
 ```
-
-  
- 
- 
-
-
 
 
 <!-- ## 1. Create an application repository on GitHub. Document configuration and deployment steps in a README document.
