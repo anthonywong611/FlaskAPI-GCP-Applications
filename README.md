@@ -79,7 +79,7 @@ kubectl get services
 
 ![](images/api_welcome.PNG)
 
-**7. Clean up the project**
+**6. Clean up the project**
 - Run the following command to terminate all infrastructures and accounts
 
 ```bash
