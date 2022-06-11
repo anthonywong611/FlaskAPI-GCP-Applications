@@ -72,10 +72,18 @@ kubectl get services
 ```
 
 - You may find the status, "pending", under the EXTERNAL-IP column. Wait and keep running the previous command until an IP address shows up.
+
+![](images/pending.PNG)
+
 - Copy the EXTERNAL-IP address of the service flask-app and access it from another tab
+
+![](images/external_ip.PNG)
 
 **6. Making requests to the API**
 
+![](images/api_welcome.PNG)
+![](images/api_post.PNG)
+![](images/api_get.PNG)
 
 **7. Clean up the project**
 - Run the following command to terminate all infrastructures and accounts
