@@ -7,6 +7,8 @@
 
 ## Infrastructure Overview
 
+![](images/workflow.PNG)
+
 ## Application Overview
 
 ---
