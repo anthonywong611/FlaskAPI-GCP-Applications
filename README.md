@@ -79,7 +79,7 @@ kubectl get services
 
 ![](images/external_ip.PNG)
 
-**6. Making requests to the API**
+- You should see the following web page show up
 
 ![](images/api_welcome.PNG)
 
