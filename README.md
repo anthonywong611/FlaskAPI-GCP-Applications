@@ -10,9 +10,12 @@
 ![](images/workflow.PNG)
 
 ## Application Overview
-
-![](images/api_welcome.PNG)
+The Flask application is a simple API exposing the users to GET and POST method. 
+- **POST**: Users can input text to submit information to be store in the backend CloudSQL Postgre instance.
+- 
 ![](images/api_post.PNG)
+- **GET**: Users can click on the "Check" button to view all the previously entered data in a tabular format. Upon request, the application retrieves all data stored in the database and return them as such on the following page
+- 
 ![](images/api_get.PNG)
 
 ---
