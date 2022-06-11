@@ -16,10 +16,6 @@
 - Keep note of the Project ID
 - [Determine and keep note of the region and zone](https://cloud.google.com/compute/docs/regions-zones#available)
 
-```bash
-gcloud compute zones list  # Run this command for reference
-```
-
 **2. Activate Cloud Shell on the top right header and clone this repository in the home directory**
 
 ```bash
