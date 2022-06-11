@@ -14,30 +14,22 @@
 **1. Go to the Goole Cloud console**
 - Create a new project
 - Keep note of the Project ID
-- [Determine and keep note of the region and zone](https://cloud.google.com/compute/docs/regions-zones)
+- [Determine and keep note of the region and zone](https://cloud.google.com/compute/docs/regions-zones#available)
 
 ```bash
 gcloud compute zones list  # Run this command for reference
 ```
 
-
 **2. Activate Cloud Shell on the top right header and clone this repository in the home directory**
-- Copy the following command to clone the repository
 
 ```bash
 git clone https://github.com/anthonywong611/paas-on-gcp.git
 ```
 
-- Change directory into the paas-on-gcp folder
-
-```bash
-cd paas-on-gcp/
-```
-
 **3. Open the Cloud Shell Editor and set up environment variables**
 - Go to the workflow folder and open [0_var.sh](https://github.com/anthonywong611/paas-on-gcp/blob/main/workflow/0_var.sh)
-- Update the project variables 
-- Update to your preference database instance variables where a "TODO: Replace these values" comment indicates
+- Update the project variables with your Project ID, Region, and Zone
+- Update the database instance variables to your preference
 
 ```bash
 # --- Project Info --- #
@@ -55,7 +47,8 @@ export DB_NAME='<database-name>'  # TODO: Replace these values
 export DB_PORT='5432'
 ```
 
-
+- Open the [deployment.yaml](https://github.com/anthonywong611/paas-on-gcp/blob/main/deployment.yaml) file
+- Update, where a "TODO: Replace these values" comment indicates, the lines with the corresponding variables
 
 <!-- ## 1. Create an application repository on GitHub. Document configuration and deployment steps in a README document.
 ---
