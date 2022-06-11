@@ -1,0 +1,24 @@
+Google Cloud Platform (GCP):
+----------------------------
+https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build#new-service
+https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk#creating-a-pv-and-a-pvc-back-by=persistent-disks
+https://cloud.google.com/kubernetes-engine/docs/quickstarts/deploy-app-container-image#standard
+https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk
+https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#kubectl
+https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating
+https://cloud.google.com/iam/docs/understanding-roles#cloud-sql-roles
+https://github.com/GoogleCloudPlatform/python-docs-samples/tree/main/cloud-sql/postgres/sqlalchemy
+https://cloud.google.com/sql/docs/postgres/sql-proxy
+https://cloud.google.com/sql/docs/postgres/connect-instance-kubernetes
+https://cloud.google.com/sql/docs/postgres/connect-kubernetes-engine#run_the_as_a_sidecar
+----------------------------
+
+Flask:
+------
+https://jinja.palletsprojects.com/en/3.1.x/templates/#for
+https://flask.palletsprojects.com/en/2.1.x/quickstart/#routing
+https://docs.sqlalchemy.org/en/14/tutorial/data.html
+https://docs.sqlalchemy.org/en/14/core/tutorial.html#using-textual-sql
+https://www.youtube.com/watch?v=zRwy8gtgJ1A&list=PLillGF-RfqbbbPz6GSEM9hLQObuQjNoj_&index=1&t=889s
+https://www.youtube.com/watch?v=Z1RJmh_OqeA&list=PLoGGJ_z5kjj7XtKTqCZuVPuqGeRYciHiy&index=6
+
