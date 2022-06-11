@@ -47,13 +47,16 @@ export DB_NAME='<database-name>'  # TODO: Replace these values
 export DB_PORT='5432'
 ```
 
+- Open the [deployment.yaml](https://github.com/anthonywong611/paas-on-gcp/blob/main/deployment.yaml) file
+- Update, where a "TODO: Replace these values" comment indicates, the lines with the corresponding variables
+
 **4. Open the Terminal and execute the infrastructure workflow**
 
 ```bash
 cd paas-on-gcp/  # if not in the directory already
 ```
 
-- The [main.sh] file will run all files in the workflow directory
+- The [main.sh](https://github.com/anthonywong611/paas-on-gcp/blob/main/main.sh) file will run all files in the workflow directory
 
 ```bash
 source main.sh
@@ -61,10 +64,23 @@ source main.sh
 
 - Wait until all resources have been provisioned
 
+**5. Access the application**
+- Once all infrastructures are up and running, run the following command to gain access to get the app service
+
+```bash
+kubectl get services  
+```
+
+- You may find the status, <pending>, under the EXTERNAL-IP column. Wait and keep running the previous command until an IP address shows up. 
+- Copy the EXTERNAL-IP address of the service flask-app and access it from another tab
+
+  
+  
+ 
+ 
 
 
-- Open the [deployment.yaml](https://github.com/anthonywong611/paas-on-gcp/blob/main/deployment.yaml) file
-- Update, where a "TODO: Replace these values" comment indicates, the lines with the corresponding variables
+
 
 <!-- ## 1. Create an application repository on GitHub. Document configuration and deployment steps in a README document.
 ---
