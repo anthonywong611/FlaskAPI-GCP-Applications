@@ -92,6 +92,8 @@ kubectl get services
 
 ![](images/api_welcome.PNG)
 
+- Click on the "Start" button and you will be directed to the application as shown in the **Application Overview** section above
+
 **6. Clean up the project**
 - Run the following command to terminate all infrastructures and accounts
 
