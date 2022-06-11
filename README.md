@@ -5,12 +5,9 @@
 # Architecture
 ![](images/architecture.png)
 
-## Application Overview
-
-
 ## Infrastructure Overview
 
-
+## Application Overview
 
 ---
 ## Running the Project
@@ -19,7 +16,9 @@
 - Keep note of the Project ID
 - [Determine and keep note of the region and zone](https://cloud.google.com/compute/docs/regions-zones#available)
 
-**2. Activate Cloud Shell on the top right header and clone this repository in the home directory**
+**2. Activate Cloud Shell and clone the repository in the home directory**
+
+![](images/shell.PNG)
 
 ```bash
 git clone https://github.com/anthonywong611/paas-on-gcp.git
