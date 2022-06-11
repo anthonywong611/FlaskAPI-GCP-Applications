@@ -47,6 +47,22 @@ export DB_NAME='<database-name>'  # TODO: Replace these values
 export DB_PORT='5432'
 ```
 
+**4. Open the Terminal and execute the infrastructure workflow**
+
+```bash
+cd paas-on-gcp/  # if not in the directory already
+```
+
+- The [main.sh] file will run all files in the workflow directory
+
+```bash
+source main.sh
+```
+
+- Wait until all resources have been provisioned
+
+
+
 - Open the [deployment.yaml](https://github.com/anthonywong611/paas-on-gcp/blob/main/deployment.yaml) file
 - Update, where a "TODO: Replace these values" comment indicates, the lines with the corresponding variables
 
