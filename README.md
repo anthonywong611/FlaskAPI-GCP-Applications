@@ -16,17 +16,19 @@
 - Keep note of the Project ID
 - [Determine and keep note of the region and zone](https://cloud.google.com/compute/docs/regions-zones#available)
 
-**2. Activate Cloud Shell and clone the repository in the home directory**
+**2. Activate Cloud Shell**
 
 ![](images/shell.PNG)
+
+- Clone this repository in the terminal 
 
 ```bash
 git clone https://github.com/anthonywong611/paas-on-gcp.git
 ```
 
 **3. Open the Cloud Shell Editor and set up environment variables**
-- Go to the workflow folder and open [0_var.sh](https://github.com/anthonywong611/paas-on-gcp/blob/main/workflow/0_var.sh)
-- Update the project variables with your Project ID, Region, and Zone
+- Open workflow/[0_var.sh](https://github.com/anthonywong611/paas-on-gcp/blob/main/workflow/0_var.sh)
+- Update the project variables with your **Project ID**, **Region**, and **Zone**
 - Update the database instance variables to your preference
 
 ```bash
