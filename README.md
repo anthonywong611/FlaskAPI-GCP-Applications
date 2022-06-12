@@ -1,5 +1,20 @@
 # FlaskAPI on Google Cloud Platform (GCP)
-- **Goal**: Deploy a containerized Flask API on Google Cloud Platform, exposing it the internet for API users to make requests and store user information. 
+
+**Goal**: Deploy an app on the cloud environment for API users to make requests and store user information. 
+
+**Rationale**: To achieve the goal efficiently, the following actions are considered
+- Write an app using Flask 
+- Create a cloud database for the app to connect to and store information in
+- Provision a virtual environment to deploy the app in
+- Establish a connection between the cloud and the virtual environment so the app may access the database
+- Create a service to expose the app to the internet
+
+**Services & Resources**: Based on the rationale, it will require resources from the following cloud services
+- CloudSQL (PostgreSQL instance & database)
+- Kubernetes Engine (Single-node Kubernetes cluster)
+- Google Service Account (CloudSQL Client Role and its key file)
+- Cloud Build (Container)
+- Artifact Registry (Container repository)
 
 ---
 # Architecture
@@ -8,6 +23,22 @@
 ## Infrastructure Overview
 
 ![](images/workflow.PNG)
+
+This project provisions resources through the cloud terminal. Each file in the workflow folder performs a particular task:
+
+**0.var**: Configure all necessary environment variables for the project on the terminal
+
+**1.env**: Setup the project environment and enable relevant services 
+
+**2.cloudsql**: Create a CloudSQL Postgre instance and a database to store data in tables
+
+**3.gke**: Create a Kubernetes cluster to host container(s) 
+
+**4.gke_sql_conn**: Create a service account and generate CloudSQL connection essentials to be stored as secrets in the Kubernetes cluster 
+
+**5.container**: Containerize the app and create a repository to store the container
+
+**6.deployment**: Deploy the container from the repository to the Kubernetes cluster and expose it to the internet
 
 ## Application Overview
 The Flask application is a simple API exposing the users to GET and POST method. 
@@ -56,7 +87,7 @@ export DB_NAME='<database-name>'  # TODO: Replace these values
 export DB_PORT='5432'
 ```
 
-- Open the [deployment.yaml](https://github.com/anthonywong611/paas-on-gcp/blob/main/deployment.yaml) file
+- Open the [deployment.yaml](https://github.com/anthonywong611/paas-on-gcp/blob/main/deployment.yaml) 
 - Update, where a "TODO: Replace these values" comment indicates, the lines with the corresponding variables
 
 **4. Open the Terminal and execute the infrastructure workflow**
