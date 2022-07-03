@@ -1,0 +1,66 @@
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Containerize Flask API and Deploy to GKE
+
+on:
+  push:
+    branches:
+    - main
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: flask-cluster    # TODO: update to cluster name
+  GKE_ZONE: northamerica-northeast2-a   # TODO: update to cluster zone
+  REPO: flask-repo
+  IMAGE: flask-app
+
+jobs:
+  setup-containerize-deploy-expose:
+    name: Setup, Containerize, Deploy, and Expose
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Authenticate to Google Cloud
+    - id: 'auth'
+      uses: google-github-actions/auth@v0
+      with:
+        credentials_json: '${{ secrets.GKE_SA_KEY }}' 
+        # 1. Kubernetes Engine Developer
+        # 2. Artifact Registry Writer 
+
+    - name: Setup # Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - run: |-
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+    # Build the Docker image
+    - name: Containerize
+      run: |-
+        gcloud builds submit \
+          --tag "$GKE_ZONE-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:latest" \
+          .
+
+    # Deploy the Docker image to the GKE cluster
+    - name: Deploy
+      run: |-
+        kubectl apply -f deployment.yaml
+
+    - name: Expose
+      run: |-
+        kubectl apply -f service.yaml
