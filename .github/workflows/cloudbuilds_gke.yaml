@@ -22,7 +22,8 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: flask-cluster    # TODO: update to cluster name
-  GKE_REGION: northamerica-northeast2   # TODO: update to cluster zone
+  GKE_REGION: northamerica-northeast2   # TODO: update to cluster region
+  GKE_ZONE: northamerica-northeast2-a   # TODO: update to cluster zone
   REPO: flask-repo
   IMAGE: flask-app
 
@@ -39,19 +40,14 @@ jobs:
     - id: 'auth'
       uses: google-github-actions/auth@v0
       with:
-        credentials_json: '${{ secrets.GKE_SA_KEY }}' 
-        # 1. Kubernetes Engine Developer
-        # 2. Artifact Registry Writer 
+        credentials_json: '${{ secrets.GKE_SA_KEY }}' # 1. Owner Role
 
     - name: Setup # Cloud SDK
       uses: google-github-actions/setup-gcloud@v0
 
-    - run: |- # just to make sure...
-        gcloud config list  
-
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_REGION-a"
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
     # Build the Docker image
     - name: Containerize
       run: |-
