@@ -16,8 +16,8 @@ spec:
       containers:
       - name: flask-app
         # TODO: Replace these values
-        image: northamerica-northeast2-a-docker.pkg.dev/data-at-anz-350321/flask-repo/flask-app:latest 
-        # image: <ZONE>-docker.pkg.dev/<PROJECT_ID>/flask-repo/flask-app:latest  
+        image: northamerica-northeast2-docker.pkg.dev/data-at-anz-350321/flask-repo/flask-app:latest 
+        # image: <REGION>-docker.pkg.dev/<PROJECT_ID>/flask-repo/flask-app:latest  
         ports:
         - containerPort: 8080
         env:
