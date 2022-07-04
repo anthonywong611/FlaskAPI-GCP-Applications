@@ -1,3 +1,12 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: high-priority
+value: 1000000
+preemptionPolicy: Never
+globalDefault: false
+description: "Make sure the pod is taken care of first..."
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -76,3 +85,4 @@ spec:
       - name: sa-volume
         secret:
           secretName: sa-secret
+      priorityClassName: high-priority
