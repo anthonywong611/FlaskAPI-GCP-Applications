@@ -32,35 +32,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    # Authenticate to Google Cloud
-    - id: 'auth'
-      uses: google-github-actions/auth@v0
-      with:
-        credentials_json: '${{ secrets.GKE_SA_KEY }}' 
-        # 1. Kubernetes Engine Developer
-        # 2. Artifact Registry Writer 
-
-    - name: Setup # Cloud SDK
-      uses: google-github-actions/setup-gcloud@v0
-
-    # Get the GKE credentials so we can deploy to the cluster
     - run: |-
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
-    # Build the Docker image
-    - name: Containerize
-      run: |-
-        gcloud builds submit \
-          --tag "$GKE_ZONE-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:latest" \
-          .
+        ls -la .
 
-    # Deploy the Docker image to the GKE cluster
-    - name: Deploy
-      run: |-
-        kubectl apply -f deployment.yaml
+    # steps:
+    # - name: Checkout
+    #   uses: actions/checkout@v3
 
-    - name: Expose
-      run: |-
-        kubectl apply -f service.yaml
+    # # Authenticate to Google Cloud
+    # - id: 'auth'
+    #   uses: google-github-actions/auth@v0
+    #   with:
+    #     credentials_json: '${{ secrets.GKE_SA_KEY }}' 
+    #     # 1. Kubernetes Engine Developer
+    #     # 2. Artifact Registry Writer 
+
+    # - name: Setup # Cloud SDK
+    #   uses: google-github-actions/setup-gcloud@v0
+
+    # # Get the GKE credentials so we can deploy to the cluster
+    # - run: |-
+    #     gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+    # # Build the Docker image
+    # - name: Containerize
+    #   run: |-
+    #     gcloud builds submit \
+    #       --tag "$GKE_ZONE-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:latest" \
+    #       .
+
+    # # Deploy the Docker image to the GKE cluster
+    # - name: Deploy
+    #   run: |-
+    #     kubectl apply -f deployment.yaml
+
+    # - name: Expose
+    #   run: |-
+    #     kubectl apply -f service.yaml
