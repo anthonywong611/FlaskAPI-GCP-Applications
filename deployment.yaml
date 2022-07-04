@@ -6,7 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels: 
-      app: flask-app 
+      app: flask-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1 
   template:
     metadata:
       labels:
