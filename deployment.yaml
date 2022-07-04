@@ -1,11 +1,3 @@
-apiVersion: scheduling.k8s.io/v1
-kind: PriorityClass
-metadata:
-  name: high-priority
-value: 1000000
-globalDefault: false
-description: "Make sure the pod is taken care of first..."
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,11 +20,11 @@ spec:
         # image: <REGION>-docker.pkg.dev/<PROJECT_ID>/flask-repo/flask-app:latest  
         resources:
           requests:
-            memory: "64Mi"
             cpu: "250m"
+            memory: "128M"
           limits:
-            memory: "128Mi"
             cpu: "500m"
+            memory: "256M"
         ports:
         - containerPort: 8080
         env:
@@ -45,24 +37,24 @@ spec:
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: db-secret  
+              name: postgres-secret  
               key: username
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
-              name: db-secret  
+              name: postgres-secret  
               key: password
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: db-secret  
+              name: postgres-secret  
               key: database
       # 2. For running the Cloud SQL Auth proxy alongside the application
       - name: cloud-sql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:latest 
         command:
           - "/cloud_sql_proxy"
-          - "-instances=data-at-anz-350321:northamerica-northeast2:sql-dev-fc536648=tcp:5432"  # TODO: Replace these values
+          - "-instances=data-at-anz-350321:northamerica-northeast2:sql-dev-1e4ec405=tcp:5432"  # TODO: Replace these values
           # - "-instances=<PROJECT_ID>:<REGION>:<INSTANCE_NAME>=tcp:5432"  
           - "-credential_file=/secrets/service_account.json"
         securityContext:
@@ -75,13 +67,13 @@ spec:
           readOnly: true
         resources:
           requests:
-            memory: "64Mi"
+            memory: "2Gi"
             cpu: "250m"
           limits:
-            memory: "128Mi"
+            memory: "4Gi"
             cpu: "500m"
       volumes:
       - name: sa-volume
         secret:
-          secretName: sa-secret
-      priorityClassName: high-priority
+          secretName: cloudsql-sa
+
