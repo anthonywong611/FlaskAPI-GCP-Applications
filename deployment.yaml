@@ -18,13 +18,13 @@ spec:
         # TODO: Replace these values
         image: northamerica-northeast2-docker.pkg.dev/data-at-anz-350321/flask-repo/flask-app:latest 
         # image: <REGION>-docker.pkg.dev/<PROJECT_ID>/flask-repo/flask-app:latest  
-        # resources:
-        #   requests:
-        #     cpu: "250m"
-        #     memory: "128M"
-        #   limits:
-        #     cpu: "500m"
-        #     memory: "256M"
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "128M"
+          limits:
+            cpu: "500m"
+            memory: "256M"
         ports:
         - containerPort: 8080
         env:
@@ -65,13 +65,13 @@ spec:
         - name: sa-volume
           mountPath: /secrets/
           readOnly: true
-        # resources:
-        #   requests:
-        #     memory: "2Gi"
-        #     cpu: "250m"
-        #   limits:
-        #     memory: "4Gi"
-        #     cpu: "500m"
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "250m"
+          limits:
+            memory: "4Gi"
+            cpu: "500m"
       volumes:
       - name: sa-volume
         secret:
