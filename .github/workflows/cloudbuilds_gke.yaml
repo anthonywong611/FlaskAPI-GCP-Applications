@@ -51,7 +51,7 @@ jobs:
 
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_REGION-a"
     # Build the Docker image
     - name: Containerize
       run: |-
