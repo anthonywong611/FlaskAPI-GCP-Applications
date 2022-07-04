@@ -21,7 +21,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: flask-cluster    # TODO: update to cluster name
+  GKE_CLUSTER: flask-cluster    
   GKE_REGION: northamerica-northeast2   # TODO: update to cluster region
   GKE_ZONE: northamerica-northeast2-a   # TODO: update to cluster zone
   REPO: flask-repo
