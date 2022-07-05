@@ -36,7 +36,7 @@ module "gke" {
 }
 
 module "registry" {
-  source     = "./registry"
+  source     = "./artifact_registry"
   project_id = var.project_id
   region     = var.region
   format     = "DOCKER"
