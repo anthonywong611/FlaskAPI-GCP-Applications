@@ -7,9 +7,10 @@ resource "random_id" "id" {
 }
 
 resource "google_sql_database_instance" "master" {
-  name             = random_id.id.hex
-  region           = var.region
-  database_version = "POSTGRES_14"
+  name                = random_id.id.hex
+  region              = var.region
+  database_version    = "POSTGRES_14"
+  deletion_protection = false  # must set this or terraform won't destroy
 
   settings {
     availability_type = var.availability_type[terraform.workspace]
@@ -39,6 +40,7 @@ resource "google_sql_user" "user" {
   instance = google_sql_database_instance.master.name
   name     = var.sql_user
   password = var.sql_pass
+  deletion_policy = "ABANDON"
 }
 
 resource "google_sql_database" "database" {
