@@ -43,23 +43,15 @@ Terraform is an Infrastructure-as-Code (IaC) service that allows users to provis
 
 ## Infrastructure Overview
 
-![](images/workflow.PNG)
+![](images/terraform_workflow.PNG)
 
-This project provisions resources through the cloud terminal. Each file in the workflow folder performs a particular task:
+Terraform plans and provisions infrastructures using the [main.tf](terraform/main.tf) file in the terraform folder with [variables.tf](terraform/variables.tf) as input file. The [terraform.tfvars](terraform/terraform.tfvars) file specifies any variables from [variables.tf](terraform/variables.tf) that don't have a default parameters. 
 
-**0.var**: Configure all necessary environment variables for the project on the terminal
+The artifact_registry, cloudsql, and gke folders are sub-modules implemented in a similar fashion. 
 
-**1.env**: Setup the project environment and enable relevant services 
+We only create the CloudSQL database instance, the Kubernetes cluster, and the container repository here. The actual containerization process using docker (Cloud Build) will take place using GitHub actions. 
 
-**2.cloudsql**: Create a CloudSQL Postgre instance and a database to store data in tables
-
-**3.gke**: Create a Kubernetes cluster to host container(s) 
-
-**4.gke_sql_conn**: Create a service account and generate CloudSQL connection essentials to be stored as secrets in the Kubernetes cluster 
-
-**5.container**: Containerize the app and create a repository to store the container
-
-**6.deployment**: Deploy the container from the repository to the Kubernetes cluster and expose it to the internet
+The GitHub action configuration can be found in the [cloudbuilds_gke.yaml](./github/workflows/cloudbuilds_gke.yaml) file.
 
 ## Application Overview
 The Flask application is a simple API exposing the users to GET and POST method. 
@@ -72,10 +64,10 @@ The Flask application is a simple API exposing the users to GET and POST method.
 
 - All the data are stored in the backend database 
 
-![](images/query.png)
+![](images/query.PNG)
 
 ---
-## Running the Project
+# Running the Project
 **1. Go to the Goole Cloud console**
 - Create a new project
 - Keep note of the Project ID
