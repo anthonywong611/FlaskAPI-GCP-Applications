@@ -7,16 +7,19 @@
 - Create a cloud database for the app to connect to and store information in
 - Provision a virtual environment to deploy the app in
 - Establish a connection between the cloud and the virtual environment so the app may access the database
-- Create a service to expose the app to the internet
+- Expose the app to the internet
 
-**Services & Resources**: Based on the rationale, it will require resources from the following cloud services
+## Technology Overview
+
+![](images/technology.png)
+
+**Services & Resources**: 
+- Terraform (Manage infrastructures as code)
 - CloudSQL (PostgreSQL instance & database)
 - Kubernetes Engine (Single-node Kubernetes cluster)
 - Google Service Account (CloudSQL Client Role and its key file)
 - Cloud Build (Container)
 - Artifact Registry (Container repository)
-
-![](images/query.PNG)
 
 ---
 # Architecture
@@ -50,6 +53,10 @@ The Flask application is a simple API exposing the users to GET and POST method.
 - **GET**: Users can click on the "Check" button to view all the previously entered data in a tabular format. Upon request, the application retrieves all data stored in the database and return them as such on the following page
 
 ![](images/api_get.PNG)
+
+- All the data are stored in the backend database 
+
+![](images/query.png)
 
 ---
 ## Running the Project
@@ -114,8 +121,6 @@ kubectl get services
 ```
 
 - You may find the status, "pending", under the EXTERNAL-IP column. Wait and keep running the previous command until an IP address shows up.
-
-![](images/pending.PNG)
 
 - Copy the EXTERNAL-IP address of the service flask-app and access it from another tab
 
