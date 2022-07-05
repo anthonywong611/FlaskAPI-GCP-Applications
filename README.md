@@ -1,28 +1,44 @@
-# FlaskAPI on Google Cloud Platform (GCP)
+# Project Description
 
-**Goal**: Deploy an app on the cloud environment for API users to make requests and store user information. 
+**Goal: Run an app on the cloud for API users to make requests and store user information.** 
 
-**Rationale**: To achieve the goal efficiently, the following actions are considered
-- Write an app using Flask 
-- Create a cloud database for the app to connect to and store information in
-- Provision a virtual environment to deploy the app in
-- Establish a connection between the cloud and the virtual environment so the app may access the database
-- Expose the app to the internet
+## Rationale 
+To achieve the goal efficiently, this project proceeds with the following path
+
+**Application**: Write an app with features in user authentication and form submission
+
+**Connection**: Create a cloud database for storing app information. We need to ensure a secured connection between the app and the database
+
+**Deployment**: Deploy the app and expose it to the internet
 
 ## Technology Overview
 
 ![](images/technology.png)
 
-**Services & Resources**: 
-- Terraform (Manage infrastructures as code)
-- CloudSQL (PostgreSQL instance & database)
-- Kubernetes Engine (Single-node Kubernetes cluster)
-- Google Service Account (CloudSQL Client Role and its key file)
-- Cloud Build (Container)
-- Artifact Registry (Container repository)
+### Flask
+The application is a simple API written using the Flask framework. Flask offers extensions like database access, template engine, user authentication, etc. 
+
+### Terraform
+Terraform is an Infrastructure-as-Code (IaC) service that allows users to provision cloud infrastructures with reusable codes. It uses configuration language to provision cloud infrastrucutres, and can simultaneously plan and manage resources from different cloud providers like AWS, GCP, and Azure. Using Terraform can significantly improve efficiency and reduce time in provisioning resources, circumventing issues like manually updating configurations on the console or on the command-line.
+
+### Google Cloud Platform (GCP)
+**CloudSQL**: We will create a PostgreSQL database instance with a user-defined root user, password, and database. This will be the database for storing user info.
+
+**Kubernetes Engine**: Kubernetes creates clusters with nodes. Each node in a cluster has pods that can be aggregated as a service to be exposed to the internet. We will spin up a Kubernetes cluster with a single master-node which will run the pod where our application will be located. 
+
+- Kubernetes can store sensitive information like password and credentials as secrets. We will store database username and password in the pod as secrets.
+
+**Artifact Registry**: This is a container registry for storing container images. Kubernetes looks for images from the repository and run them on pods.
+
+**Cloud Build**: This is Google's equivalent of docker, and we will build the application as a container image here and push it to the registry.
+
+**Google Service Account (GSA)**: Cloud resources require permission to interact with other resources. In particular, we need to generate credential keys from service accounts with the following priviledges:
+
+- Owner Role (for machines or softwares to provision and interact with infrastructures on behalf of GCP)
+- CloudSQL Client Role (for Kubernetes to establish a TCP connection between the SQL database and the application inside the cluster)
 
 ---
-# Architecture
+# Architecture (Infrastructures & Application)
 ![](images/architecture.png)
 
 ## Infrastructure Overview
