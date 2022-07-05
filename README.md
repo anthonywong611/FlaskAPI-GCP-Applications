@@ -16,6 +16,8 @@
 - Cloud Build (Container)
 - Artifact Registry (Container repository)
 
+![](images/query.PNG)
+
 ---
 # Architecture
 ![](images/architecture.png)
