@@ -27,8 +27,9 @@ resource "google_sql_database_instance" "master" {
     location_preference {
       zone = "${var.region}-${var.sql_master_zone}"
     }
+    
+  }
 }
-
 resource "google_sql_user" "user" {
   depends_on = [
     google_sql_database_instance.master
