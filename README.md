@@ -51,7 +51,7 @@ The artifact_registry, cloudsql, and gke folders are sub-modules implemented in 
 
 We only create the CloudSQL database instance, the Kubernetes cluster, and the container repository here. The actual containerization process using docker (Cloud Build) will take place using GitHub actions. 
 
-The GitHub action configuration can be found in the [cloudbuilds_gke.yaml](./github/workflows/cloudbuilds_gke.yaml) file.
+The GitHub action configuration can be found in the [cloudbuilds_gke.yaml](.github/workflows/cloudbuilds_gke.yaml) file.
 
 ## Application Overview
 The Flask application is a simple API exposing the users to GET and POST method. 
