@@ -107,6 +107,8 @@ export GOOGLE_APPLICATION_CREDENTIALS="<path_to>/FlaskAPI-GCP-Applications/terra
 - Create a secret called **GKE_PROJECT** and put in your Project ID as value
 - Create a secret called **GKE_SA_KEY** and paste the content of the **owner-sa-key.json** in as value
 
+![](images/github_secrets.PNG)
+
 ## 4. Install Requirements and Initialize 
 
 - Install [gcloud](https://cloud.google.com/sdk/docs/install) 
@@ -122,11 +124,11 @@ gcloud init  # Set up your project ID, region, and zone
 
 terraform init  # Make sure you are in the terraform/ folder
 
-terraform workspace new dev
+terraform workspace new dev  # The default workspace is 'default'. We will work in the 'dev' workspace
 
-terraform plan
+terraform plan  # Let you preview the infrastructure changes
 
-terraform apply --auto-approve
+terraform apply --auto-approve  
 ```
 
 - Once it finishes building, the terminal will output a list of infrastructure info
@@ -184,3 +186,6 @@ kubectl get services  # You may find the status, "pending", under the EXTERNAL-I
 ```bash
 terraform destroy --auto-approve
 ```
+
+- Delete the **owner-sa** and **cloudsql-sa** service accounts (Optional)
+- Delete the credential keys and GiHub action secrets (Optional)
