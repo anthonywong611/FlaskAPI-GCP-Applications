@@ -67,11 +67,20 @@ The Flask application is a simple API exposing the users to GET and POST method.
 ![](images/query.PNG)
 
 ---
+
 # Running the Project
-**1. Go to the Goole Cloud console**
+
+**0. Preparation**
 - Create a new project
 - Keep note of the Project ID
 - [Determine and keep note of the region and zone](https://cloud.google.com/compute/docs/regions-zones#available)
+
+**1. Create Service Accounts**
+- Go to IAM and create a service account called **owner-sa** with Owner role
+- Download a new key in JSON format and rename it [owner-sa-key.json]()
+- Create another service account called **cloudsql-sa** with Cloud SQL Client role
+- Download a new key in JSON format and rename it [cloudsql-sa-key.json]()
+
 
 **2. Activate Cloud Shell**
 
@@ -80,32 +89,12 @@ The Flask application is a simple API exposing the users to GET and POST method.
 - Clone this repository in the terminal 
 
 ```bash
-git clone https://github.com/anthonywong611/paas-on-gcp.git
+git clone https://github.com/anthonywong611/FlaskAPI-GCP-Applications.git
 ```
 
-**3. Open the Cloud Shell Editor and set up environment variables**
-- Open workflow/[0_var.sh](https://github.com/anthonywong611/paas-on-gcp/blob/main/workflow/0_var.sh)
-- Update the project variables with your **Project ID**, **Region**, and **Zone**
-- Update the database instance variables to your preference
+**3. Provision the Infrastructures**
 
-```bash
-# --- Project Info --- #
-export PROJECT_ID='<project-id>'  # TODO: Replace these values
-export REGION='<region>'  # TODO: Replace these values 
-export ZONE='<zone>'  # TODO: Replace these values
-export WORKING_DIR=$(pwd)
 
-# --- Database Instance Info --- #
-export INSTANCE_HOST='127.0.0.1'
-export INSTANCE_NAME='<instance-name>'  # TODO: Replace these values
-export DB_USER='<user-name>'  # TODO: Replace these values
-export DB_PASS='<password>'  # TODO: Replace these values
-export DB_NAME='<database-name>'  # TODO: Replace these values
-export DB_PORT='5432'
-```
-
-- Open the [deployment.yaml](https://github.com/anthonywong611/paas-on-gcp/blob/main/deployment.yaml) 
-- Update, where a "TODO: Replace these values" comment indicates, the lines with the corresponding variables
 
 **4. Open the Terminal and execute the infrastructure workflow**
 
