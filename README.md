@@ -80,9 +80,9 @@ The Flask application is a simple API exposing the users to GET and POST method.
 ## 1. Create Service Accounts and Download Credentials
 
 - Go to IAM and create a service account called **owner-sa** with Owner role
-- Download a new key in JSON format and rename it [owner-sa-key.json]()
+- Download a new key in JSON format and rename it **owner-sa-key.json**
 - Create another service account called **cloudsql-sa** with Cloud SQL Client role
-- Download a new key in JSON format and rename it [cloudsql-sa-key.json]()
+- Download a new key in JSON format and rename it **cloudsql-sa-key.json**
 
 ![](images/service_accounts.PNG)
 
@@ -90,60 +90,84 @@ The Flask application is a simple API exposing the users to GET and POST method.
 
 - Fork and clone this repository in a local terminal 
 - Create a folder called **service_accounts** in the **terraform** folder
-- Move both [owner-sa-key.json]() and [cloudsql-sa-key.json]() files to the **service_accounts** folder
+- Move both **owner-sa-key.json** and **cloudsql-sa-key.json** files to the **service_accounts** folder
 - Set environment variable for grant terraform permission to provision GCP resources
 
 ```bash
 export GOOGLE_APPLICATION_CREDENTIALS="<path_to>/FlaskAPI-GCP-Applications/terraform/service_accounts/owner-sa-key.json"
 ```
 
-- Update the variables in [terraform.tfvars](terraform/terraform.tfvars)
+## 3. Update Configurations
+- Update the variables in [terraform.tfvars](terraform/terraform.tfvars) where a **TODO** comment indicates
+- Update the variables in [cloudbuilds_gke.yaml](.github/workflows/cloudbuilds_gke.yaml) where a **TODO** comment indicates
 
 ## 3. GitHub Actions Setup
 
 - Go to the forked repository settings and select action secrets
 - Create a secret called **GKE_PROJECT** and put in your Project ID as value
-- Create a secret called **GKE_SA_KEY** and paste the content of the [owner-sa-key.json]() in as value
+- Create a secret called **GKE_SA_KEY** and paste the content of the **owner-sa-key.json** in as value
 
-## 4. Install Requirements
+## 4. Install Requirements and Initialize 
 
 - Install [gcloud](https://cloud.google.com/sdk/docs/install) 
-
-```bash
-gcloud init  # Set up your project ID, region, and zone
-```
 
 - Install [kubectl](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl)
 
 - Install [terraform](https://www.terraform.io/downloads) 
 
+## 5. Provision the Infrastructures
+
 ```bash
+gcloud init  # Set up your project ID, region, and zone
+
 terraform init  # Make sure you are in the terraform/ folder
+
+terraform workspace new dev
+
+terraform plan
+
+terraform apply --auto-approve
 ```
 
-
-**4. Open the Terminal and execute the infrastructure workflow**
+- Once it finishes building, the terminal will output a list of infrastructure info
 
 ```bash
-cd paas-on-gcp/  # if not in the directory already
+terraform output  # If no outputs printed
 ```
 
-- The [main.sh](https://github.com/anthonywong611/paas-on-gcp/blob/main/main.sh) file will run all files in the workflow directory
+## 6. Update Kubernetes Configurations
+
+- Take note of the CloudSQL instance name outputed by terraform
+- Update the lines in the [deployment.yaml](deployment.yaml) file where a **TODO** comment indicates
+- Store database username, password, and CloudSQL Client Role credential key as Kubernetes secrets
 
 ```bash
-source main.sh
+gcloud container clusters get-credentials flask-cluster  # Get credentials for kubectl to work with the cluster
 ```
-
-- Wait until all resources have been provisioned
-
-**5. Access the application**
-- Once all infrastructures are up and running, run the following command to gain access to get the app service
 
 ```bash
-kubectl get services  
+kubectl create secret generic postgres-secret \
+--from-literal=username=<sql_user> \  
+--from-literal=password=<sql_pass> \
+--from-literal=database=<db_name> 
 ```
 
-- You may find the status, "pending", under the EXTERNAL-IP column. Wait and keep running the previous command until an IP address shows up.
+```bash
+kubectl create secret generic cloudsql-sa \
+--from-file=service_account.json=service_accounts/cloudsql-sa-key.json
+```
+
+
+## 7. Deploy the Application Using GitHub Actions
+
+- Commit and push the changes previously made to the configurations 
+- The GitHub Action will be triggered when the changes are pushed. It will automatically containerize the application using Cloud Build and store it in the repository, then it will deploy the container image to Kubernetes and expose it to the internet through a service.
+
+## 8. Access the Application
+
+```bash
+kubectl get services  # You may find the status, "pending", under the EXTERNAL-IP column. Wait and keep running the previous command until an IP address shows up.
+```
 
 - Copy the EXTERNAL-IP address of the service flask-app and access it from another tab
 
@@ -155,24 +179,8 @@ kubectl get services
 
 - Click on the "Start" button and you will be directed to the application as shown in the **Application Overview** section above
 
-**6. Clean up the project**
-- Run the following command to terminate all infrastructures and accounts
+## 9. Clean up the project
 
 ```bash
-source clean_up.sh
+terraform destroy --auto-approve
 ```
-
-
-<!-- ## 1. Create an application repository on GitHub. Document configuration and deployment steps in a README document.
----
-## 2. Using the application repository, create a simple container app (using Docker) using Flask or any other simple API framework to expose GET and POST methods.  
-- The app should create the table in the database if it does not exist (for all verbs). 
-- The POST method is used to insert a new record into the table and the GET method returns records in the table.  
-- Use JSON for the request and response formats. 
----
-## 3. Create a GitHub action to deploy the application when a PR is merged into the develop branch.
----
-### Challenge 1: Deploy the GKE cluster and database instance on a private VPC network, with access via a Global HTTPS load balancer. 
----
-### Challenge 2: Implement a basic service mesh using Istio including an egress service entry for Cloud SQL.
---- -->
