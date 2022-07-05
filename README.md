@@ -70,30 +70,56 @@ The Flask application is a simple API exposing the users to GET and POST method.
 
 # Running the Project
 
-**0. Preparation**
+## 0. Preparation
+
 - Create a new project
 - Keep note of the Project ID
 - [Determine and keep note of the region and zone](https://cloud.google.com/compute/docs/regions-zones#available)
+- Enable API for CloudSQL, Kubernetes Engine, Cloud Build, and Artifact Registry
 
-**1. Create Service Accounts**
+## 1. Create Service Accounts and Download Credentials
+
 - Go to IAM and create a service account called **owner-sa** with Owner role
 - Download a new key in JSON format and rename it [owner-sa-key.json]()
 - Create another service account called **cloudsql-sa** with Cloud SQL Client role
 - Download a new key in JSON format and rename it [cloudsql-sa-key.json]()
 
+![](images/service_accounts.PNG)
 
-**2. Activate Cloud Shell**
+## 2. Project Environment Setup
 
-![](images/shell.PNG)
-
-- Clone this repository in the terminal 
+- Fork and clone this repository in a local terminal 
+- Create a folder called **service_accounts** in the **terraform** folder
+- Move both [owner-sa-key.json]() and [cloudsql-sa-key.json]() files to the **service_accounts** folder
+- Set environment variable for grant terraform permission to provision GCP resources
 
 ```bash
-git clone https://github.com/anthonywong611/FlaskAPI-GCP-Applications.git
+export GOOGLE_APPLICATION_CREDENTIALS="<path_to>/FlaskAPI-GCP-Applications/terraform/service_accounts/owner-sa-key.json"
 ```
 
-**3. Provision the Infrastructures**
+- Update the variables in [terraform.tfvars](terraform/terraform.tfvars)
 
+## 3. GitHub Actions Setup
+
+- Go to the forked repository settings and select action secrets
+- Create a secret called **GKE_PROJECT** and put in your Project ID as value
+- Create a secret called **GKE_SA_KEY** and paste the content of the [owner-sa-key.json]() in as value
+
+## 4. Install Requirements
+
+- Install [gcloud](https://cloud.google.com/sdk/docs/install) 
+
+```bash
+gcloud init  # Set up your project ID, region, and zone
+```
+
+- Install [kubectl](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl)
+
+- Install [terraform](https://www.terraform.io/downloads) 
+
+```bash
+terraform init  # Make sure you are in the terraform/ folder
+```
 
 
 **4. Open the Terminal and execute the infrastructure workflow**
